@@ -1,0 +1,15 @@
+{
+    "name": "mikoop/bubwise-deploy",
+    "description": "Envoy deploy for bubwise",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^2.5",
+        "laravel/envoy": "^1.5"
+    },
+    "authors": [
+        {
+            "name": "Michael Cooper",
+            "email": "mikoop@mac.com"
+        }
+    ]
+}

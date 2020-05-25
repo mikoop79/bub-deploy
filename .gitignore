@@ -1,0 +1,8 @@
+/vendor/
+.env
+.idea
+
+Envoy*.php
+!Envoy.blade.php
+7976bd91dc09cdc55e38c4750b413095
+.phpintel
