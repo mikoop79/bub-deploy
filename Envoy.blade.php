@@ -21,6 +21,8 @@
     $laraveldirectory = $serverDetails['location'];
     $origin = "origin";
 
+    $messsage = isset($message) ? ' Message:' . $message : '';
+
 @endsetup
 
 @servers($productionServers);
@@ -37,7 +39,6 @@
 @story('deploy-build', ['on' => $server])
      start
      git
-     npm-build
      notify
 @endstory
 
@@ -84,7 +85,7 @@
         composer install -v --no-dev
     @else 
         echo " --- Installing composer dependencies ";
-        composer install -v
+        composer install -v --no-dev
     @endif
     
     composer dump-autoload
@@ -107,7 +108,10 @@
 
 @task('npm-build', ['on'=> $server] )
     echo " --- Running npm run build:";
+    echo " --- Changing to app directory";
+
     cd {{ $laraveldirectory }}
+
     npm install && npm run build
 @endtask
 
@@ -159,7 +163,7 @@
 
 @finished
     if ($server != 'startmycompany.com.au')
-        @slack('https://hooks.slack.com/services/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', '#production_deployments', "Deployment completed for $server ");
+        @slack('https://hooks.slack.com/services/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', '#production_deployments', "Deployment completed for $server $message");
    
 @endfinished
 
